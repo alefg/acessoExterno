@@ -1,55 +1,117 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
+# Sistema de Gerenciamento de Solicitações de Cadastro de Usuários - SEI
 
-## About Laravel
+## 📌 Visão Geral
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Este sistema visa gerenciar solicitações de cadastro de usuários externos ao SEI (Sistema Eletrônico de Informações) do Governo do Estado de Minas Gerais. Permite o envio de formulários por cidadãos, análise por responsáveis setoriais e administração global pelo superadministrador.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🛠 Tecnologias Utilizadas
 
-## Learning Laravel
+- **Backend:** Laravel 12
+- **Frontend:** Blade + Bootstrap
+- **Componentes:** Laravel Breeze, Laravel UI, Livewire
+- **Banco de Dados:** MySQL
+- **Armazenamento de Arquivos:** Local (filesystem Laravel)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## 👥 Perfis de Usuário
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+| Perfil              | Acesso e Permissões                                                                 |
+|---------------------|--------------------------------------------------------------------------------------|
+| Solicitante         | Acesso público. Preenche formulário e envia documentos                              |
+| Responsável de Área | Login com e-mail/senha. Visualiza e executa cadastros apenas de sua área            |
+| Superadmin          | Acesso total ao sistema. Visualiza, cadastra áreas, órgãos e usuários               |
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 📋 Funcionalidades Principais
 
-### Premium Partners
+### Formulário Público
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+- Nome completo
+- Tipo de representação: Pessoa Física ou Jurídica
+- E-mail pessoal
+- E-mail do SEI (mesmo ou não)
+- Upload de documentos obrigatórios:
+  - Termo assinado
+  - Documento com CPF
+  - Selfie com documento
+  - Documentação complementar para PJ
 
-## Contributing
+### Tipos de Preenchimento do Termo
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Manual (escaneado)
+- Digital com Adobe Reader
+- Com Certificado Digital ICP-Brasil
 
-## Code of Conduct
+### Aceite de Termos
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- Aceite obrigatório conforme legislação vigente
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 🔄 Fluxo de Solicitação
 
-## License
+1. **Pendente**
+2. **Em análise**
+3. **Aprovado**
+4. **Concluído**
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+## 🏢 Multiorganização
+
+- Cadastro de múltiplos órgãos
+- Cada órgão com suas áreas e responsáveis
+- Isolamento completo de dados por órgão
+
+---
+
+## 📧 Notificações
+
+- Envio automático de e-mail ao responsável da área ao receber nova solicitação
+  - Assunto: “Nova solicitação de cadastro de usuários”
+  - Conteúdo: Nome do solicitante e link direto para a análise
+
+---
+
+## 📊 Relatórios e Exportações
+
+- Exportação de dados em CSV:
+  - Por data
+  - Por área
+  - Por status
+- Exportação em lote de documentos
+
+---
+
+## 🕵️ Auditoria
+
+- Registro do tempo entre submissão e conclusão
+- Histórico completo de movimentações de status
+
+---
+
+## ✅ Requisitos Não Funcionais
+
+| Requisito     | Descrição                                                             |
+|---------------|----------------------------------------------------------------------|
+| Usabilidade   | Interface responsiva, compatível com dispositivos móveis             |
+| Manutenção    | Código limpo e estruturado em arquitetura MVC                        |
+| Desempenho    | Tempo de resposta inferior a 2 segundos em interações usuais         |
+| Armazenamento | Arquivos locais com limite de 2MB por arquivo                        |
+| Privacidade   | Dados acessíveis apenas ao responsável da área e superadmin          |
+
+---
+
+## 📅 Versão e Responsável
+
+- **Versão:** 1.0  
+- **Data:** 08/07/2025  
+- **Responsável:** Alef – Líder de Projeto e Análise de Requisitos
+
+---
