@@ -1,0 +1,121 @@
+Documento de Especificação de Requisitos de Software (SRS)
+Sistema de Gerenciamento de Solicitações de Cadastro de Usuários - SEI
+________________________________________
+1. Introdução
+1.1 Finalidade
+Este documento descreve todos os requisitos funcionais e não funcionais do sistema de gerenciamento de solicitações de cadastro de usuários externos no SEI (Sistema Eletrônico de Informações), destinado ao Governo do Estado de Minas Gerais.
+
+1.2 Escopo
+O sistema permite que solicitantes preencham um formulário público, enviem documentos e acompanhem o processo de cadastro. Responsáveis de áreas específicas realizam a aprovação das solicitações, enquanto o superadmin possui visão e gestão global sobre todas as operações.
+
+1.3 Definições
+•	Solicitante: Pessoa externa que deseja acesso ao SEI.
+•	Responsável de área: Servidor que valida solicitações de sua área.
+•	Superadmin: Usuário com acesso irrestrito ao sistema.
+________________________________________
+2. Requisitos Gerais do Sistema
+2.1 Tecnologias
+•	Backend: Laravel 12
+•	Frontend: Blade + Bootstrap
+•	Componentes: Laravel Breeze, Laravel UI, Livewire
+•	Banco de Dados: MySQL
+•	Armazenamento: Local (filesystem Laravel)
+2.2 Perfis de Usuário
+•	Público (Solicitante): acesso sem autenticação
+•	Responsável de área: login por e-mail/senha com reset por e-mail
+•	Superadmin: login por e-mail/senha com reset por e-mail
+2.3 Acesso
+•	O formulário é público
+•	Responsáveis só acessam solicitações de sua área
+•	Superadmin acessa todas as solicitações
+2.4 Segurança
+•	Sem 2FA
+•	Sem criptografia dos arquivos
+•	Controle de acesso baseado em órgão e área
+________________________________________
+3. Funcionalidades Principais
+3.1 Formulário Público Passo 1 - Formulário digital para cadastro no SEI!MG
+Texto descritivo: 
+
+
+Para dar início ao processo, preencha o formulário digital de cadastro de usuário externo SEI!MG, clicando no link a seguir: LINK 
+https://www.sei.mg.gov.br/sei/controlador_externo.php?acao=usuario_externo_enviar_cadastro&acao_origem=usuario_externo_avisar_cadastro&id_orgao_acesso_externo=0
+
+Após o preenchimento e envio, retorne para esta tela e prossiga.
+
+3.2 Formulário Público 
+
+•	Nome completo do solicitante (insert)
+•	A que se destina o presente cadastro? Representação: Pessoa Física ou Jurídica (selectbox)
+•	E-mail (pessoal)
+•	E-mail cadastrado para o usuário externo 
+
+
+Instruções
+Preencha e assine o “Termo de declaração de Concordância e Veracidade” (CLIQUE AQUI PARA ACESSAR E BAIXAR O TERMO). Este termo pode ser preenchido com ou sem certificado digital ICP-Brasil.
+Segue abaixo a lista de documentos exigidos em cada caso:
+- Preenchimento Manual
+•	
+1.	Cópia digitalizada do “Termo de Declaração de Concordância e Veracidade” preenchido e assinado manualmente.
+O original desse documento deverá ser mantido em posse do usuário e poderá ser solicitado pela administração pública caso necessário;
+2.	Cópia digitalizada de documento de identificação civil no qual conste CPF;
+3.	Cópia digitalizada de procuração, termo de posse, ata ou outro documento digitalizado caso o Usuário Externo esteja representando alguma organização pública ou privada;
+4.	Autorretrato (selfie) segurando o documento de identificação. Ex.: (CNH, CI, Passaporte, etc.)
+- Preenchimento Digital
+
+1.	Cópia digitalizada do “Termo de Declaração de Concordância e Veracidade” preenchido e assinado digitalmente via software Adobe Acrobat Reader (CLIQUE AQUI PARA INSTALÁ-LO), conforme procedimento próprio (CLIQUE AQUI PARA ACESSAR O MANUAL).
+O original desse documento deverá ser mantido em posse do usuário e poderá ser solicitado pela administração pública caso necessário;
+2.	Cópia digitalizada de procuração, termo de posse, ata ou outro documento digitalizado caso o Usuário Externo esteja representando alguma organização pública ou privada;
+Em caso de preenchimento com certificado digital, serão necessários os seguintes documentos:
+
+1.	PDF do “Termo de Declaração de Concordância e Veracidade” utilizando certificação digital;
+2.	Cópia digitalizada de procuração, termo de posse, ata ou outro documento digitalizado caso o Usuário Externo esteja representando alguma organização pública ou privada (pessoa jurídica);
+Caso realize o procedimento com o certificado digital, em hipótese alguma imprima o termo para preencher e escanear/digitalizar.
+Baixe o arquivo, preencha os campos destacados utilizando o software “Adobe Acrobat Reader” com seu Certificado Digital ICP-Brasil e assine-o.
+
+
+•	Upload de arquivos:
+o	Termo assinado - Obrigatório
+o	Documento com CPF
+o	Selfie com documento
+o	(Se pessoa jurídica) Procuração/ata/termo de posse
+•	Aceite dos termos legais
+3.2 Fluxo de Solicitação
+•	Status: Pendente → Em análise → Aprovado → Concluído
+•	Campos de análise para responsável de área:
+o	Observações/comentários
+o	Botão de “Executar cadastro”
+3.3 Multiorganização
+•	Cadastro de órgãos distintos
+•	Cada órgão possui:
+o	Suas próprias áreas
+o	Seus usuários (responsáveis)
+•	Isolamento de dados por órgão
+3.4 Notificações
+•	E-mail automático para responsável de área ao receber nova solicitação:
+o	Assunto: “Nova solicitação de cadastro de usuários”
+o	Corpo: Nome do solicitante + link para a solicitação
+3.5 Relatórios e Exportações
+•	Exportação de dados em CSV:
+o	Por data
+o	Por área
+o	Por status
+•	Exportação em lote de arquivos de solicitações
+3.6 Auditoria
+•	Registro de tempo de resposta por solicitação
+•	Registro de histórico de status e movimentações
+________________________________________
+4. Requisitos Não Funcionais
+Requisito	Descrição
+Usabilidade	Interface simples, responsiva e compatível com dispositivos móveis
+Manutenção	Código documentado, com arquitetura MVC
+Desempenho	Resposta ao usuário inferior a 2 segundos em formulários
+Armazenamento	Arquivos locais, limite de 2MB por arquivo
+Privacidade	Dados acessíveis apenas por responsáveis da área ou superadmin
+________________________________________
+5. Considerações Finais
+Este SRS servirá como guia para a implementação do sistema e futuras manutenções, sendo base para desenvolvimento, QA e validação institucional.
+________________________________________
+Versão: 1.0
+Data: 08/07/2025
+Responsável: Alef (Líder de Projeto e Análise de Requisitos)
