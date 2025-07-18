@@ -119,3 +119,236 @@ ________________________________________
 Versão: 1.0
 Data: 08/07/2025
 Responsável: Alef (Líder de Projeto e Análise de Requisitos)
+
+
+
+
+Estrutura de Arquivos - Sistema de Gerenciamento de Solicitações SEI
+1. Configuração Inicial
+
+Criar projeto Laravel 12
+Instalar dependências: Laravel Breeze, Laravel UI, Livewire
+Configurar banco MySQL
+
+2. Migrations (database/migrations/)
+
+2025_01_01_000001_create_orgaos_table.php
+2025_01_01_000002_create_areas_table.php
+2025_01_01_000003_create_users_table.php
+2025_01_01_000004_create_solicitacoes_table.php
+2025_01_01_000005_create_arquivos_table.php
+2025_01_01_000006_create_auditoria_table.php
+
+3. Models (app/Models/)
+
+Orgao.php
+Area.php
+User.php (modificar existente)
+Solicitacao.php
+Arquivo.php
+Auditoria.php
+
+4. Controllers (app/Http/Controllers/)
+
+SolicitacaoController.php (formulário público)
+ResponsavelController.php (área do responsável)
+SuperadminController.php (área do superadmin)
+ArquivoController.php (upload/download)
+RelatorioController.php (exportações)
+
+5. Requests (app/Http/Requests/)
+
+SolicitacaoRequest.php
+ArquivoRequest.php
+AprovarSolicitacaoRequest.php
+
+6. Services (app/Services/)
+
+SolicitacaoService.php
+ArquivoService.php
+NotificacaoService.php
+AuditoriaService.php
+RelatorioService.php
+
+7. Middleware (app/Http/Middleware/)
+
+VerificarResponsavel.php
+VerificarSuperadmin.php
+ControleAcesso.php
+
+8. Mails (app/Mail/)
+
+NovaSolicitacaoMail.php
+StatusSolicitacaoMail.php
+
+9. Routes (routes/)
+
+web.php (rotas principais)
+auth.php (autenticação)
+
+10. Views (resources/views/)
+10.1 Layouts
+
+layouts/app.blade.php
+layouts/public.blade.php
+
+10.2 Formulário Público
+
+public/passo1.blade.php
+public/passo2.blade.php
+public/formulario.blade.php
+public/sucesso.blade.php
+
+10.3 Área do Responsável
+
+responsavel/dashboard.blade.php
+responsavel/solicitacoes.blade.php
+responsavel/visualizar.blade.php
+responsavel/analisar.blade.php
+
+10.4 Área do Superadmin
+
+superadmin/dashboard.blade.php
+superadmin/solicitacoes.blade.php
+superadmin/usuarios.blade.php
+superadmin/orgaos.blade.php
+superadmin/areas.blade.php
+superadmin/relatorios.blade.php
+
+10.5 Componentes
+
+components/status-badge.blade.php
+components/arquivo-upload.blade.php
+components/tabela-solicitacoes.blade.php
+
+11. Seeders (database/seeders/)
+
+DatabaseSeeder.php (modificar)
+OrgaoSeeder.php
+AreaSeeder.php
+UserSeeder.php
+
+12. Factories (database/factories/)
+
+OrgaoFactory.php
+AreaFactory.php
+SolicitacaoFactory.php
+
+13. Config (config/)
+
+filesystem.php (configurar storage local)
+mail.php (configurar e-mail)
+
+14. Livewire Components (app/Livewire/)
+
+FormularioSolicitacao.php
+UploadArquivos.php
+TabelaSolicitacoes.php
+FiltroBusca.php
+
+15. Resources (resources/)
+15.1 Assets
+
+css/app.css
+js/app.js
+js/components/upload.js
+js/components/form-validation.js
+
+15.2 Lang (resources/lang/pt/)
+
+validation.php
+messages.php
+
+16. Storage (storage/)
+
+app/public/uploads/
+app/public/documentos/
+
+17. Public (public/)
+
+uploads/ (link simbólico)
+css/ (assets compilados)
+js/ (assets compilados)
+
+18. Tests (tests/)
+18.1 Feature
+
+SolicitacaoTest.php
+ResponsavelTest.php
+SuperadminTest.php
+ArquivoTest.php
+
+18.2 Unit
+
+SolicitacaoServiceTest.php
+AuditoriaServiceTest.php
+
+19. Utilitários
+
+app/Helpers/FileHelper.php
+app/Helpers/StatusHelper.php
+app/Enums/Status.php
+app/Enums/TipoRepresentacao.php
+
+20. Políticas de Acesso (app/Policies/)
+
+SolicitacaoPolicy.php
+UserPolicy.php
+
+21. Observadores (app/Observers/)
+
+SolicitacaoObserver.php
+
+22. Comandos Artisan (app/Console/Commands/)
+
+LimparArquivosAntigos.php
+EnviarLembretes.php
+
+23. Eventos (app/Events/)
+
+SolicitacaoEnviada.php
+SolicitacaoAprovada.php
+
+24. Listeners (app/Listeners/)
+
+EnviarNotificacaoResponsavel.php
+RegistrarAuditoria.php
+
+25. Providers (app/Providers/)
+
+AppServiceProvider.php (modificar)
+AuthServiceProvider.php (modificar)
+EventServiceProvider.php (modificar)
+
+26. Configurações Adicionais
+
+.env (configurações de ambiente)
+webpack.mix.js (compilação de assets)
+composer.json (dependências)
+package.json (dependências frontend)
+
+27. Documentação
+
+README.md
+INSTALACAO.md
+API.md
+DEPLOY.md
+
+Ordem de Desenvolvimento Recomendada:
+
+Configurar projeto e dependências
+Criar migrations e executar
+Criar models com relacionamentos
+Criar seeders e popular banco
+Configurar autenticação
+Criar controllers básicos
+Criar views básicas
+Implementar formulário público
+Implementar área do responsável
+Implementar área do superadmin
+Implementar upload de arquivos
+Implementar notificações
+Implementar relatórios
+Implementar auditoria
+Criar testes
+Documentar sistema
