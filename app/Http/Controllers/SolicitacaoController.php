@@ -14,6 +14,13 @@ use Illuminate\Support\Str;
 
 class SolicitacaoController extends Controller
 {
+
+
+    public function index()
+    {
+        // Lógica para retornar dados, view ou JSON
+        return view('superadmin.solicitacoes');
+    }
     /**
      * Exibe o formulário público para criar uma nova solicitação.
      */
